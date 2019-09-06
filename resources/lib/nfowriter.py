@@ -2,12 +2,12 @@ import os
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import SubElement
 
-from config import *
-import dialogprogress
-from gamedatabase import *
-from rcbxmlreaderwriter import RcbXmlReaderWriter
-from util import *
-import util
+from .config import *
+import resources.lib.dialogprogress as dialogprogress
+from .gamedatabase import *
+from .rcbxmlreaderwriter import RcbXmlReaderWriter
+from .util import *
+import resources.lib.util as util
 import xbmcvfs
 
 
@@ -144,7 +144,7 @@ class NfoWriter(RcbXmlReaderWriter):
 
             try:
                 SubElement(root, 'thumb', {'type': artworktype.name, 'local': local}).text = online
-            except Exception, (exc):
+            except Exception as exc:
                 Logutil.log('Error writing artwork url: ' + str(exc), util.LOG_LEVEL_WARNING)
 
         self.writeNfoElementToFile(root, platform, romFile, gameNameFromFile, nfoFile)

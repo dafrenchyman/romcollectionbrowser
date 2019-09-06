@@ -1,8 +1,8 @@
 import sys
 import xml.etree.ElementTree as ET
-from web_scraper import WebScraper
-from util import Logutil as log
-from gamename_utils import GameNameUtil
+from resources.lib.pyscraper.web_scraper import WebScraper
+from resources.lib.util import Logutil as log
+from resources.lib.pyscraper.gamename_utils import GameNameUtil
 
 
 # FIXME TODO Exception handling (i.e. no games found)

@@ -1,11 +1,11 @@
 import os, sys, re
 import time, zipfile, glob
 
-import util
-from gamedatabase import *
-from util import *
-from util import __addon__
-from util import Logutil as log
+import resources.lib.util as util
+from .gamedatabase import *
+from .util import *
+from .util import __addon__
+from .util import Logutil as log
 import xbmc, xbmcgui, xbmcvfs
 
 KODI_JSONRPC_TOGGLE_FULLSCREEN = '{"jsonrpc": "2.0", "method": "Input.ExecuteAction", "params": {"action": "togglefullscreen"}, "id": "1"}'
@@ -97,7 +97,7 @@ class RCBLauncher(object):
 
             gui.writeMsg("")
 
-        except Exception, (exc):
+        except Exception as exc:
             log.error("Error while launching emu: " + str(exc))
             gui.writeMsg(util.localize(32035) + ": " + str(exc))
 
@@ -303,7 +303,7 @@ class RCBLauncher(object):
                     fname, ext = os.path.splitext(f)
                     if ext not in ('.sav', '.xml', '.png'):
                         xbmcvfs.delete(os.path.join(tempDir, f))
-        except Exception, (exc):
+        except Exception as exc:
             log.error("Error deleting files after launch emu: " + str(exc))
             gui.writeMsg(util.localize(32036) + ": " + str(exc))
 
@@ -313,7 +313,7 @@ class RCBLauncher(object):
 
         try:
             names = self.__getNames(filext, rom)
-        except Exception, (exc):
+        except Exception as exc:
             log.error("Error handling compressed file: " + str(exc))
             return []
 
@@ -333,7 +333,7 @@ class RCBLauncher(object):
 
             try:
                 archives = self.__getArchives(filext, rom, names)
-            except Exception, (exc):
+            except Exception as exc:
                 log.error("Error handling compressed file: " + str(exc))
                 return []
 
@@ -402,7 +402,7 @@ class RCBLauncher(object):
         emuParams = emuParams.replace('%Romname%', romname)
 
         # gamename
-        gamename = unicode(gameRow[DataBaseObject.COL_NAME])
+        gamename = str(gameRow[DataBaseObject.COL_NAME])
         emuParams = emuParams.replace('%game%', gamename)
         emuParams = emuParams.replace('%GAME%', gamename)
         emuParams = emuParams.replace('%Game%', gamename)
@@ -410,7 +410,7 @@ class RCBLauncher(object):
         # ask num
         if re.search('(?i)%ASKNUM%', emuParams):
             options = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-            number = unicode(xbmcgui.Dialog().select(util.localize(32167), options))
+            number = str(xbmcgui.Dialog().select(util.localize(32167), options))
             emuParams = emuParams.replace('%asknum%', number)
             emuParams = emuParams.replace('%ASKNUM%', number)
             emuParams = emuParams.replace('%Asknum%', number)

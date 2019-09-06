@@ -1,11 +1,13 @@
 import xbmcgui
 
-import util, helper
+import resources.lib.util as util
+import resources.lib.helper as helper
 
-from gamedatabase import *
-from util import *
-from config import *
-from util import Logutil as log
+from resources.lib.gamedatabase import *
+from resources.lib.gui import CONTROL_GAMES_GROUP_START
+from resources.lib.util import *
+from resources.lib.config import *
+from resources.lib.util import Logutil as log
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 CONTROL_BUTTON_SETFAVORITE_GAME = 5118
@@ -134,7 +136,6 @@ class ContextMenuDialog(object):
             gameID = self.selectedGame.getProperty('gameId')
             self.gui.deleteGame(gameID)
             self.gui.showGames()
-            from gui import CONTROL_GAMES_GROUP_START
             if pos > 0:
                 pos = pos - 1
                 self.gui.setFilterSelection(CONTROL_GAMES_GROUP_START, pos)

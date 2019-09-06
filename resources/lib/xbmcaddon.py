@@ -54,7 +54,7 @@ class Addon(object):
 
             locstr = self.Addon.getLocalizedString(id=6)
         """
-        return unicode()
+        return str()
 
     def getSetting(self, id):
         """Returns the value of a setting as a unicode string.
@@ -99,10 +99,10 @@ class Addon(object):
 
             version = self.Addon.getAddonInfo('version')
         """
-        print 'getAddonInfo called with key: ' + str(id)
+        print('getAddonInfo called with key: ' + str(id))
 
         if(id == 'path'):
             basepath = os.getcwd()
             path = os.path.join(basepath, "..\..")
-            print 'path = ' + str(path)
+            print('path = ' + str(path))
             return path

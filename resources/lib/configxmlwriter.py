@@ -1,9 +1,9 @@
 import os
 
-import util
-from util import *
-from config import *
-from rcbxmlreaderwriter import RcbXmlReaderWriter
+import resources.lib.util as util
+from resources.lib.util import *
+from resources.lib.config import *
+from resources.lib.rcbxmlreaderwriter import RcbXmlReaderWriter
 from xml.etree.ElementTree import *
 
 
@@ -299,6 +299,6 @@ class ConfigXmlWriter(RcbXmlReaderWriter):
 
             return True, ""
 
-        except Exception, (exc):
+        except Exception as exc:
             print("Error: Cannot write config.xml: " + str(exc))
             return False, util.localize(32008) + ": " + str(exc)

@@ -1,13 +1,13 @@
 from xml.etree.ElementTree import *
 
-import helper
-from configxmlwriter import *
-from emulatorautoconfig.autoconfig import EmulatorAutoconfig
-from rcbxmlreaderwriter import RcbXmlReaderWriter
-from util import Logutil as log
+import resources.lib.helper as helper
+from .configxmlwriter import *
+from .emulatorautoconfig.autoconfig import EmulatorAutoconfig
+from .rcbxmlreaderwriter import RcbXmlReaderWriter
+from .util import Logutil as log
 import xbmc, xbmcgui, xbmcvfs
-from pyscraper.web_scraper import WebScraper
-from pyscraper.scraper import AbstractScraper
+from .pyscraper.web_scraper import WebScraper
+from .pyscraper.scraper import AbstractScraper
 
 RETRIEVE_INFO_ONLINE_ARTWORK_ONLINE = 0  # Game description and artwork need to be downloaded
 RETRIEVE_INFO_LOCAL_ARTWORK_LOCAL = 1  # Game description and artwork already exist locally

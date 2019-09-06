@@ -3,10 +3,10 @@
 import re
 import os
 import xbmcvfs
-from util import __addon__
-from util import Logutil as log
-from rcbexceptions import *
-from file_scraper import FileScraper
+from resources.lib.util import __addon__
+from resources.lib.util import Logutil as log
+from resources.lib.rcbexceptions import *
+from resources.lib.pyscraper.file_scraper import FileScraper
 
 
 class MAME_Scraper(FileScraper):
@@ -107,7 +107,7 @@ class MAME_Scraper(FileScraper):
                 raise ScraperNoSearchResultsFoundException("Unable to find %s in MAME history dat file" % gamename)
 
         except Exception as e:
-            print "Error searching for game %s using regex: %s" % (gamename, str(e))
+            print("Error searching for game %s using regex: %s" % (gamename, str(e)))
             return []
 
         self.resultdata = [rdata.groupdict()]

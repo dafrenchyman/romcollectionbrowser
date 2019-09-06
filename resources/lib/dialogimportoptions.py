@@ -1,9 +1,9 @@
-from config import *
-from util import *
-import util
+from .config import *
+from .util import *
+import resources.lib.util as util
 import xbmc
-from dialogbase import DialogBase
-from pyscraper.scraper import AbstractScraper
+from .dialogbase import DialogBase
+from .pyscraper.scraper import AbstractScraper
 
 ACTION_MOVEMENT_UP = (3,)
 ACTION_MOVEMENT_DOWN = (4,)

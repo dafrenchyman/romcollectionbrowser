@@ -1,8 +1,8 @@
 import xbmc, xbmcgui
 import os
 
-import util
-from util import *
+import resources.lib.util as util
+from resources.lib.util import *
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 CONTROL_BUTTON_EXIT = 5101

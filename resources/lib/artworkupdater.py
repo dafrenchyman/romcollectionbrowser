@@ -1,9 +1,9 @@
 
 import os, re
 import xbmcvfs
-import util
-from util import Logutil as log
-from gamedatabase import Game, GameView, File
+import resources.lib.util as util
+from resources.lib.util import Logutil as log
+from resources.lib.gamedatabase import Game, GameView, File
 
 class ArtworkUpdater(object):
 

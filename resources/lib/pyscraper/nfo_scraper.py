@@ -4,9 +4,9 @@ import xml.etree.ElementTree as ET
 
 import xbmcvfs
 
-from file_scraper import FileScraper
-from nfowriter import NfoWriter
-from util import Logutil as log
+from resources.lib.pyscraper.file_scraper import FileScraper
+from resources.lib.nfowriter import NfoWriter
+from resources.lib.util import Logutil as log
 
 
 class NFO_Scraper(FileScraper):

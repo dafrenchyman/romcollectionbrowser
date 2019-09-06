@@ -1,7 +1,7 @@
-from web_scraper import WebScraper
-from rcbexceptions import *
-from util import Logutil as log
-from gamename_utils import GameNameUtil
+from resources.lib.pyscrauer.web_scraper import WebScraper
+from resources.lib.pyscrauer.rcbexceptions import *
+from resources.lib.util import Logutil as log
+from resources.lib.gamename_utils import GameNameUtil
 
 
 # FIXME TODO exceptions, e.g. game not found

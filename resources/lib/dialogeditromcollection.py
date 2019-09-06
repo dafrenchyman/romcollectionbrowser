@@ -2,15 +2,17 @@ import xbmc, xbmcgui
 
 import os
 
-import util, helper, config
-from util import *
-from util import Logutil as log
-from dialogbase import DialogBase
-import dialogdeleteromcollection
-from configxmlwriter import *
-import wizardconfigxml
-from emulatorautoconfig.autoconfig import EmulatorAutoconfig
-from pyscraper.scraper import AbstractScraper
+import resources.lib.util as util
+import resources.lib.helper as helper
+import resources.lib.config as config
+from .util import *
+from .util import Logutil as log
+from .dialogbase import DialogBase
+import resources.lib.dialogdeleteromcollection as dialogdeleteromcollection
+from .configxmlwriter import *
+import resources.lib.wizardconfigxml as wizardconfigxml
+from .emulatorautoconfig.autoconfig import EmulatorAutoconfig
+from .pyscraper.scraper import AbstractScraper
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 

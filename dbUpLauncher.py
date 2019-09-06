@@ -12,11 +12,11 @@ BASE_RESOURCE_PATH = os.path.join(addonPath, "resources")
 sys.path.append(os.path.join(BASE_RESOURCE_PATH, "lib"))
 sys.path.append(os.path.join(BASE_RESOURCE_PATH, "lib", "pyscraper"))
 
-from gamedatabase import GameDataBase
-import util
-import dbupdate
-import config
-from config import Site
+from resources.lib.gamedatabase import GameDataBase
+import resources.lib.util as util
+import resources.lib.dbupdate as dbupdate
+import resources.lib.config as config
+from resources.lib.config import Site
 
 monitor = xbmc.Monitor()
 

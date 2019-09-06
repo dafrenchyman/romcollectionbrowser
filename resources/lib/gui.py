@@ -1,15 +1,19 @@
 import xbmc, xbmcgui, xbmcaddon
 import time, os
 
-from util import *
-import util
-import helper, config
-import dialogprogress
-import dialogupdateartwork
-import nfowriter
-import dialogeditromcollection
-from config import *
-from gamedatabase import *
+from resources.lib import wizardconfigxml, dialoggameinfo, dialogcontextmenu
+from resources.lib.configxmlupdater import ConfigxmlUpdater
+from resources.lib.launcher import RCBLauncher
+from .util import *
+import resources.lib.util as util
+import resources.lib.helper as helper
+import resources.lib.config as config
+import resources.lib.dialogprogress as dialogprogress
+import resources.lib.dialogupdateartwork as dialogupdateartwork
+import resources.lib.nfowriter as nfowriter
+import resources.lib.dialogeditromcollection as dialogeditromcollection
+from .config import *
+from .gamedatabase import *
 
 #Action Codes
 # See guilib/Key.h
@@ -77,7 +81,7 @@ class MyPlayer(xbmc.Player):
         xbmc.log('RCB MyPlayer: onPlaybackEnded')
 
         if self.gui == None:
-            print "RCB_WARNING: gui == None in MyPlayer"
+            print("RCB_WARNING: gui == None in MyPlayer")
             return
 
         self.gui.setFocus(self.gui.getControl(CONTROL_GAMES_GROUP_START))
@@ -207,13 +211,11 @@ class UIGameDB(xbmcgui.WindowXML):
                     return config, False
 
         if createNewConfig:
-            import wizardconfigxml
             statusOk, errorMsg = wizardconfigxml.ConfigXmlWizard().createConfigXml(configFile)
             if statusOk == False:
                 xbmcgui.Dialog().ok(util.SCRIPTNAME, util.localize(32001), errorMsg)
                 return config, False
         else:
-            from configxmlupdater import *
             #check if config.xml is up to date
             returnCode, message = ConfigxmlUpdater().updateConfig(configFile)
             if returnCode == False:
@@ -233,7 +235,7 @@ class UIGameDB(xbmcgui.WindowXML):
         try:
             self.gdb = GameDataBase(util.getAddonDataPath())
             self.gdb.connect()
-        except Exception, (exc):
+        except Exception as exc:
             xbmcgui.Dialog().ok(util.SCRIPTNAME, util.localize(32000), str(exc))
             Logutil.log('Error accessing database: ' + str(exc), util.LOG_LEVEL_ERROR)
             return False
@@ -351,7 +353,7 @@ class UIGameDB(xbmcgui.WindowXML):
                 Logutil.log('onAction: ACTION_CTRL_F', util.LOG_LEVEL_INFO)
                 self.set_isfavorite_for_selection(self.getSelectedItem())
 
-        except Exception, (exc):
+        except Exception as exc:
             Logutil.log("RCB_ERROR: unhandled Error in onAction: " + str(exc), util.LOG_LEVEL_ERROR)
 
     def onClick(self, controlId):
@@ -822,7 +824,7 @@ class UIGameDB(xbmcgui.WindowXML):
 
         timestamp2 = time.clock()
         diff = (timestamp2 - timestamp1) * 1000
-        print "showGames: load %d games from db in %d ms" % (len(games), diff)
+        print("showGames: load %d games from db in %d ms" % (len(games), diff))
 
         #used to show percentage during game loading
         divisor = len(games) / 10
@@ -921,7 +923,7 @@ class UIGameDB(xbmcgui.WindowXML):
         #show navigation hint
         if self.Settings.getSetting(util.SETTING_RCB_SHOWNAVIGATIONHINT).upper() == 'TRUE':
             view_mode = self.get_selected_view_mode()
-            print 'view_mode = %s' %view_mode
+            print('view_mode = %s' %view_mode)
             if int(view_mode) in VIEWS_VERTICAL:
                 self.writeMsg(util.localize(32208))
             elif int(view_mode) in VIEWS_HORIZONTAL:
@@ -941,7 +943,7 @@ class UIGameDB(xbmcgui.WindowXML):
         try:
             romCollection = self.config.romCollections[selectedGame.getProperty('romCollectionId')]
         except Exception as err:
-            print err.message
+            print(err.message)
             Logutil.log('Cannot get rom collection with id: ' + str(selectedGame.getProperty('romCollectionId')),
                         util.LOG_LEVEL_ERROR)
 
@@ -987,7 +989,6 @@ class UIGameDB(xbmcgui.WindowXML):
             #self.player.stoppedByRCB = True
             self.player.stop()
 
-        from launcher import RCBLauncher
         launcher = RCBLauncher()
         launcher.launchEmu(self.gdb, self, gameId, self.config, selectedGame)
         Logutil.log("End launchEmu", util.LOG_LEVEL_INFO)
@@ -1112,7 +1113,6 @@ class UIGameDB(xbmcgui.WindowXML):
 
         constructorParam = "720p"
 
-        import dialoggameinfo
         try:
             gid = dialoggameinfo.UIGameInfoView("script-RCB-gameinfo.xml", util.getAddonInstallPath(),
                                                 util.getConfiguredSkin(), constructorParam, gdb=self.gdb, gameId=gameId,
@@ -1154,8 +1154,6 @@ class UIGameDB(xbmcgui.WindowXML):
         Logutil.log("End showGameInfoDialog", util.LOG_LEVEL_INFO)
 
     def showContextMenu(self):
-
-        import dialogcontextmenu
 
         """
         constructorParam = "720p"
@@ -1360,7 +1358,7 @@ class UIGameDB(xbmcgui.WindowXML):
                 self.selectedConsoleId = int(romcollection.id)
             else:
                 button.setLabel(util.localize(32120))
-        except AttributeError, e:
+        except AttributeError as e:
             log.error('An error occured while loading the filter settings: %s' %e)
 
         genreid = rcbSetting[RCBSetting.COL_lastSelectedGenreId]
@@ -1391,7 +1389,7 @@ class UIGameDB(xbmcgui.WindowXML):
             else:
                 button.setLabel(util.localize(32120))
                 self.selectedRating = 0
-        except AttributeError, e:
+        except AttributeError as e:
             log.error('An error occured while loading the filter settings: %s' %e)
 
         region = rcbSetting[RCBSetting.COL_lastSelectedRegion]
@@ -1468,7 +1466,7 @@ class UIGameDB(xbmcgui.WindowXML):
             else:
                 button.setLabel(util.localize(32120))
                 return 0
-        except AttributeError, e:
+        except AttributeError as e:
             log.error('An error occured while loading the filter settings: %s' % e)
             return 0
 
@@ -1480,7 +1478,7 @@ class UIGameDB(xbmcgui.WindowXML):
                 button.setLabel(row[Genre.COL_NAME])
             else:
                 button.setLabel(util.localize(32120))
-        except AttributeError, e:
+        except AttributeError as e:
             log.error('An error occured while loading the filter settings: %s' % e)
 
     def setFilterSelection(self, controlId, selectedIndex):
@@ -1568,7 +1566,7 @@ class UIGameDB(xbmcgui.WindowXML):
     def getControlById(self, controlId):
         try:
             control = self.getControl(controlId)
-        except Exception, (exc):
+        except Exception as exc:
             #HACK there seems to be a problem with recognizing the scrollbar controls
             if controlId not in (CONTROL_SCROLLBARS):
                 Logutil.log("Control with id: %s could not be found. Check WindowXML file. Error: %s" % (

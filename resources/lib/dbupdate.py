@@ -7,21 +7,21 @@ import xbmcvfs
 import xbmcgui
 import fnmatch
 
-import util
-from util import *
-from util import KodiVersions
-from util import Logutil as log
-from util import __addon__
-import helper
-from config import *
-from gamedatabase import *
-from pyscraper.scraper import AbstractScraper
-from pyscraper.web_scraper import WebScraper
-from pyscraper.matcher import Matcher
-from pyscraper.nfo_scraper import NFO_Scraper
+import resources.lib.util as util
+from resources.lib.util import *
+from resources.lib.util import KodiVersions
+from resources.lib.util import Logutil as log
+from resources.lib.util import __addon__
+import resources.lib.helper as helper
+from resources.lib.config import *
+from resources.lib.gamedatabase import *
+from resources.lib.pyscraper.scraper import AbstractScraper
+from resources.lib.pyscraper.web_scraper import WebScraper
+from resources.lib.pyscraper.matcher import Matcher
+from resources.lib.pyscraper.nfo_scraper import NFO_Scraper
 
-from nfowriter import NfoWriter
-from rcbexceptions import *
+from resources.lib.nfowriter import NfoWriter
+from resources.lib.rcbexceptions import *
 
 monitor = xbmc.Monitor()
 
@@ -286,7 +286,7 @@ class DBUpdate(object):
         files = []
         for romPath in romCollection.romPaths:
             log.info("Reading rom files in path: %s" % romPath)
-            files = self.walkDownPath(files, unicode(romPath), romCollection.maxFolderDepth)
+            files = self.walkDownPath(files, str(romPath), romCollection.maxFolderDepth)
 
         # only use files that are not already present in database
         if enableFullReimport == False:
@@ -751,7 +751,7 @@ class DBUpdate(object):
                         u"Game does exist in database but update is not allowed for current rom collection. game: %s" % game_row[DataBaseObject.COL_NAME])
 
                 return gameId
-        except Exception, (exc):
+        except Exception as exc:
             log.error(u"An error occured while adding game '%s'. Error: %s" % (game_row[DataBaseObject.COL_NAME], exc))
             return None
 
@@ -928,7 +928,7 @@ class DBUpdate(object):
             if isinstance(resultValue, str):
                 resultValue = resultValue.decode('utf-8')
 
-        except Exception, (exc):
+        except Exception as exc:
             log.warn(u"Error while resolving item: %s: %s" % (itemName, exc))
 
         try:
@@ -1034,14 +1034,14 @@ class DBUpdate(object):
             try:
                 self.download_thumb(thumbUrl, fileName)
 
-            except Exception, (exc):
+            except Exception as exc:
                 log.error("Could not create file: '%s'. Error message: '%s'" % (fileName, exc))
                 # xbmcgui.Dialog().ok(util.localize(32012), util.localize(32011))
                 return False, artworkurls
 
             Logutil.log("Download finished.", util.LOG_LEVEL_INFO)
 
-        except Exception, (exc):
+        except Exception as exc:
             log.warn("Error in getThumbFromOnlineSource: %s" % exc)
 
         return True, artworkurls

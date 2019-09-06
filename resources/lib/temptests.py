@@ -2,7 +2,7 @@
 
 import os, sys, requests
 
-from config import *
+from .config import *
 
 
 BASE_RESOURCE_PATH = os.path.join(os.getcwd())

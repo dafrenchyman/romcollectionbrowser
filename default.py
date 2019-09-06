@@ -18,6 +18,12 @@ import xbmc
 import xbmcaddon
 
 # Shared resources
+import xbmcgui
+
+from resources.lib import util, helper
+from resources.lib.config import Config
+from resources.lib.gamedatabase import GameDataBase, GameView
+
 addon = xbmcaddon.Addon(id='script.games.rom.collection.browser')
 addonPath = addon.getAddonInfo('path')
 
@@ -90,9 +96,6 @@ class Main(object):
 
     def gatherWidgetData(self, param):
         xbmc.log('start gatherWidgetData')
-        import util, helper
-        from gamedatabase import DataBaseObject, GameView, GameDataBase
-        from config import Config
 
         gdb = GameDataBase(util.getAddonDataPath())
         gdb.connect()
@@ -159,16 +162,16 @@ class Main(object):
                 xbmcgui.Window(10000).setProperty("MostPlayedROM.%d.Alternatetitle" % count, game[GameView.COL_alternateTitle])
                 xbmcgui.Window(10000).setProperty("MostPlayedROM.%d.Version" % count, game[GameView.COL_version])
 
-            except Exception, (exc):
+            except Exception as exc:
                 xbmc.log('RCB: Error while getting most played games: ' + str(exc))
 
         gdb.close()
 
     def launchGame(self, param):
-        import util
-        from launcher import RCBLauncher
-        from gamedatabase import GameDataBase
-        from config import Config
+        import resources.lib.util as util
+        from resources.lib.launcher import RCBLauncher
+        from resources.lib.gamedatabase import GameDataBase
+        from resources.lib.config import Config
 
         gdb = GameDataBase(util.getAddonDataPath())
         gdb.connect()
@@ -189,12 +192,11 @@ if __name__ == "__main__":
     xbmc.log('RCB started')
     try:
         Main()
-    except Exception, (exc):
+    except Exception as exc:
         message = 'Unhandled exception occured during execution of RCB:'
         message2 = str(exc)
         message3 = 'See xbmc.log for details'
         xbmc.log(message)
         xbmc.log(message2)
-        import xbmcgui
 
         xbmcgui.Dialog().ok("Rom Collection Browser", message, message2, message3)

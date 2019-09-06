@@ -4,10 +4,10 @@ import time
 
 from xbmcaddon import Addon
 
-from scraper import AbstractScraper
-from rcbexceptions import *
-from util import Logutil as log
-from util import __addon__
+from resources.lib.pyscraper.scraper import AbstractScraper
+from resources.lib.rcbexceptions import *
+from resources.lib.util import Logutil as log
+from resources.lib.util import __addon__
 
 
 class WebScraper(AbstractScraper):
@@ -195,7 +195,7 @@ class WebScraper(AbstractScraper):
 
     def open_json_url(self, **kwargs):
         log.info('Retrieving url %s, params = %s' %(kwargs['url'], kwargs['params']))
-        
+
         try:
             r = requests.get(kwargs['url'], headers=self._headers, params=kwargs['params'])
         except ValueError:

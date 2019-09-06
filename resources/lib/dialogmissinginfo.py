@@ -1,8 +1,9 @@
-from configxmlwriter import *
-from util import *
-import util, config
+from .configxmlwriter import *
+from .util import *
+import resources.lib.util as util
+import resources.lib.config as config
 import xbmcgui
-from dialogbase import DialogBase
+from .dialogbase import DialogBase
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 

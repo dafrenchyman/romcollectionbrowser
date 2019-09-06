@@ -3,10 +3,10 @@ import HTMLParser
 
 import xbmcgui
 
-import util
-from util import __addon__
-from util import Logutil as log
-from gamename_utils import GameNameUtil
+import resources.lib.util as util
+from resources.lib.util import __addon__
+from resources.lib.util import Logutil as log
+from resources.lib.pyscraper.gamename_utils import GameNameUtil
 
 
 class Matcher(object):
@@ -128,7 +128,7 @@ class Matcher(object):
                     # perfect match
                     return result
 
-            except Exception, (exc):
+            except Exception as exc:
                 log.warn("An error occured while matching the best result: " + str(exc))
 
         log.info("No result found for gamename %s" % gamenameFromFile)

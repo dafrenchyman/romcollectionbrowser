@@ -2,16 +2,16 @@ import json
 import os, re
 import glob
 
-from gamedatabase import *
-from config import FileType
-from util import Logutil
-import util
+from .gamedatabase import *
+from .config import FileType
+from .util import Logutil
+import resources.lib.util as util
 import xbmc, xbmcgui
 
 
 def saveReadString(prop):
     try:
-        result = unicode(prop)
+        result = str(prop)
     except:
         result = u''
 

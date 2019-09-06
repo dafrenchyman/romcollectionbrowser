@@ -1,7 +1,7 @@
 import sys
 import xml.etree.ElementTree as ET
-from web_scraper import WebScraper
-from util import Logutil as log
+from resources.lib.pyscraper.web_scraper import WebScraper
+from resources.lib.util import Logutil as log
 
 
 # FIXME TODO Exception handling (i.e. no games found)
@@ -138,7 +138,7 @@ class TheGamesDB_Scraper_Legacy(WebScraper):
             except KeyError:
                 log.warn("Image type {0} not present in retrieve results".format(image))
 
-        print u"Found game using ElementTree parser: {0}".format(result)
+        print(u"Found game using ElementTree parser: {0}".format(result))
         return result
 
     """
@@ -181,7 +181,7 @@ class TheGamesDB_Scraper_Legacy(WebScraper):
                 # If we have an attribute error, typically there is no ReleaseDate for this game. Skip.
                 pass
 
-        print u"Found {0} results using ElementTree parser: {1}".format(len(results), results)
+        print(u"Found {0} results using ElementTree parser: {1}".format(len(results), results))
 
         return results
 

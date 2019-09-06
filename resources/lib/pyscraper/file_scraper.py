@@ -1,4 +1,4 @@
-from scraper import AbstractScraper
+from resources.lib.pyscraper.scraper import AbstractScraper
 
 
 class FileScraper(AbstractScraper):

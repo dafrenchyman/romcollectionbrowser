@@ -1,8 +1,8 @@
 import xbmc
 import xbmcgui
 
-from util import Logutil as log
-from configxmlwriter import *
+from resources.lib.util import Logutil as log
+from resources.lib.configxmlwriter import *
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 

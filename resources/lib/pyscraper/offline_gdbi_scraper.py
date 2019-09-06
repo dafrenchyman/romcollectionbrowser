@@ -3,8 +3,8 @@
 import re
 import xml.etree.ElementTree as ET
 import xbmcvfs
-from file_scraper import FileScraper
-from gamename_utils import GameNameUtil
+from resources.lib.pyscraper.file_scraper import FileScraper
+from resources.lib.pyscraper.gamename_utils import GameNameUtil
 import util
 from util import Logutil as log
 

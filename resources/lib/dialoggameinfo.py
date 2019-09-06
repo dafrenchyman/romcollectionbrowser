@@ -1,8 +1,9 @@
 import xbmc, xbmcgui
-import helper, util
-from launcher import RCBLauncher
-from util import *
-from gamedatabase import *
+import resources.lib.helper as helper
+import resources.lib.util as util
+from .launcher import RCBLauncher
+from .util import *
+from .gamedatabase import *
 
 ACTION_CANCEL_DIALOG = (9, 10, 51, 92, 110)
 ACTION_MOVEMENT_LEFT = (1,)
@@ -25,10 +26,10 @@ class MyPlayer(xbmc.Player):
     gui = None
 
     def onPlayBackEnded(self):
-        print 'RCB: onPlaybackEnded'
+        print('RCB: onPlaybackEnded')
 
         if (self.gui == None):
-            print "RCB_WARNING: gui == None in MyPlayer"
+            print("RCB_WARNING: gui == None in MyPlayer")
             return
 
         self.gui.setFocus(self.gui.getControl(CONTROL_BUTTON_PLAYGAME))

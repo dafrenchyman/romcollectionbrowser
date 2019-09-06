@@ -1,5 +1,5 @@
-from util import Logutil as log
-from rcbexceptions import *
+from resources.lib.util import Logutil as log
+from resources.lib.rcbexceptions import *
 
 
 class AbstractScraper(object):

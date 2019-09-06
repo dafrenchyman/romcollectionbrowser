@@ -1,11 +1,11 @@
-from config import *
-from util import *
-import util
-import helper
-import dialogprogress
+from .config import *
+from .util import *
+import resources.lib.util as util
+import resources.lib.helper as helper
+import resources.lib.dialogprogress as dialogprogress
 import xbmc
-from dialogbase import DialogBase
-from artworkupdater import ArtworkUpdater
+from .dialogbase import DialogBase
+from .artworkupdater import ArtworkUpdater
 
 
 ACTION_MOVEMENT_UP = (3,)

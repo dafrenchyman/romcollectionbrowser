@@ -1,10 +1,10 @@
 import os, sys, re
 import xbmcvfs
-import util
-from util import *
-from rcbxmlreaderwriter import RcbXmlReaderWriter
+import resources.lib.util as util
+from resources.lib.util import *
+from resources.lib.rcbxmlreaderwriter import RcbXmlReaderWriter
 from xml.etree.ElementTree import *
-from util import Logutil as log
+from resources.lib.util import Logutil as log
 
 #friendly name : db column, missing filter statement
 gameproperties = {'Title': ['name', "name = ''"],
@@ -386,7 +386,7 @@ class RomCollection(object):
                 fts[arttype] = self.getAvailableFileTypeForArt(arttype, placing)
 
         else:
-            print 'WARNING - Unsupported image placing type: ' + placing.name
+            print('WARNING - Unsupported image placing type: ' + placing.name)
 
         return fts
 
